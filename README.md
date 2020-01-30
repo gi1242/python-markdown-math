@@ -7,7 +7,7 @@ Math extension for Python-Markdown
 
 This extension adds math formulas support to [Python-Markdown].
 
-[Python-Markdown]: https://github.com/waylan/Python-Markdown
+[Python-Markdown]: https://github.com/Python-Markdown/markdown
 
 Installation
 ------------
@@ -28,7 +28,7 @@ list of Python-Markdown extensions.
 Check [Python-Markdown documentation] for details on how to load
 extensions.
 
-[Python-Markdown documentation]: http://pythonhosted.org/Markdown/extensions/
+[Python-Markdown documentation]: https://python-markdown.github.io/reference/#extensions
 
 Usage
 -----
@@ -36,13 +36,13 @@ Usage
 To use this extension, you need to include [MathJax] library in HTML files, like:
 
 ```html
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js">
 </script>
 ```
 
-(replace `2.7.0` with the latest version if it is available).
+(replace `2.7.4` with the latest version if it is available).
 
-[MathJax]: http://www.mathjax.org/
+[MathJax]: https://www.mathjax.org/
 
 Also, you need to specify a configuration for MathJax. Please note that
 most of standard configuratons include `tex2jax` extension, which is not needed
@@ -98,3 +98,11 @@ Notes
 
 If you use [ReText](https://github.com/retext-project/retext), this extension
 is not needed as it is included by default.
+
+This extension also works with Katex.  Use the following in your page `<head>`:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/mathtex-script-type.min.js" defer></script> 
+```
