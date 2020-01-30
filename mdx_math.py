@@ -15,8 +15,8 @@ from markdown.extensions import Extension
 
 class inlineMathProcessor( InlineProcessor ):
     def handleMatch( self, m, data ):
-        # MathJAX handles all the math. Just set uses_math, and protect the
-        # math from markdown expansion.
+        # MathJAX handles all the math. Just set the uses_math flag, and
+        # protect the contents from markdown expansion.
         self.md.uses_math = True
         return m.group(0), m.start(0), m.end(0)
 
@@ -25,28 +25,21 @@ class MathExtension(Extension):
         self.config = {
             'enable_dollar_delimiter':
                 [False, 'Enable single-dollar delimiter'],
-            'use_asciimath':
-                [False, 'Use AsciiMath syntax instead of TeX syntax'],
         }
         super(MathExtension, self).__init__(*args, **kwargs)
-        #self.md.uses_math = False
 
     def extendMarkdown(self, md):
         md.registerExtension(self)
 
         mathRegExps = [
-            r'(?<!\\)\\\((.+?)\\\)', # \( ... \)
-            r'(?<!\\)\$\$.+?\$\$', # $$ ... $$
-            r'(?<!\\)\\\[.+?\\\]', # \[ ... \]
+            r'(?<!\\)\\\((.+?)\\\)',    # \( ... \)
+            r'(?<!\\)\$\$.+?\$\$',      # $$ ... $$
+            r'(?<!\\)\\\[.+?\\\]',      # \[ ... \]
+            r'(?<!\\)\\begin{([a-z]+?\*?)}.+?\\end{\1}',
         ]
         if self.getConfig('enable_dollar_delimiter'):
             md.ESCAPED_CHARS.append('$')
             mathRegExps.append( r'(?<!\\|\$)\$.+?\$' ) # $ ... $
-        if not self.getConfig('use_asciimath'):
-            # \begin...\end is TeX only
-            mathRegExps.append(
-                r'(?<!\\)\\begin{([a-z]+?\*?)}.+?\\end{\1}' )
-
         for i, pattern in enumerate(mathRegExps):
             # we should have higher priority than 'escape' which has 180
             md.inlinePatterns.register(
