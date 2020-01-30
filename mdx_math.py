@@ -4,10 +4,11 @@
 Math extension for Python-Markdown
 ==================================
 
-Adds support for displaying math formulas using
-[MathJax](http://www.mathjax.org/).
+Adds support for displaying math formulas using MathJax / KaTeX
 
-Author: 2015-2017, Dmitry Shachnev <mitya57@gmail.com>.
+Copyright 2019-2020 Gautam Iyer <gi1242+mdxmath@gmail.com>
+
+Based on code originally written by Dmitry Shachnev <mitya57@gmail.com>
 '''
 
 from markdown.inlinepatterns import InlineProcessor
